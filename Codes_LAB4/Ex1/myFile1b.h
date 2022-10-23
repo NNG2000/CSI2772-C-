@@ -18,3 +18,44 @@ public:
 	bool addCourse(Course*, int);
 };
 
+Student::Student(int id, int maxC) {
+	numID = id;
+	maxCourses = maxC;
+	nbCourses = 0;
+	List_grades = (int*)malloc(sizeof(int));
+	List_courses = (Course**)malloc(sizeof(Course*));
+	*List_courses = (Course*)malloc(sizeof(Course));
+
+
+}
+
+Student::~Student() {
+	delete List_grades;
+	delete List_courses;
+}
+
+double Student::average() {
+	double sum = 0;
+	for (int i = 0; i < nbCourses; i++) {
+		sum += *(List_grades + i);
+	}
+	return sum / nbCourses;
+
+}
+
+int Student::totalHours() {
+	int sum = 0;
+	if (nbCourses > 0) {
+		for (int i = 0; i < nbCourses; i++) {
+			sum += (*(List_courses + i))->getHours();
+		}
+		return sum;
+	}
+	return 0;
+}
+
+
+bool Student::addCourse(Course* c, int grade){
+    //TO DO
+}
+
