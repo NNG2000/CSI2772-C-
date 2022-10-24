@@ -57,5 +57,11 @@ int Student::totalHours() {
 
 bool Student::addCourse(Course* c, int grade){
     //TO DO
+	if (maxCourses == nbCourses)
+		return false;
+	List_grades[nbCourses] = grade;
+	List_courses[nbCourses] = c;
+	nbCourses++;
+	return true;
 }
 
