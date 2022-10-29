@@ -20,8 +20,10 @@ void CardsSet::novSet() {
     for (int i = 0; i < 4; i++) {
         for (int j = 1; j < 14; j++) {
             set[s] = Card(static_cast<color>(i), j);
+            s++;
         }
     }
+    number = 52;
 }
 
 void CardsSet::shuffle() {
@@ -34,10 +36,11 @@ void CardsSet::shuffle() {
     random_shuffle(num, num + nc);
 
     for (int i = 0; i < nc; i++)
-        secondset[i]=set[num[i]];
+        secondset[i] = set[num[i]];
 
-    for (int i = 0; i < nc; i++)
+    for (int i = 0; i < nc; i++) {
         set[i] = secondset[i];
+    }
 }
 
 Card CardsSet::take() {
