@@ -1,6 +1,7 @@
 #include <iostream>
 using namespace std;
 #include <cassert> //for assert()
+#include <string>
 
 enum color { club, diamond, heart, spade };
 

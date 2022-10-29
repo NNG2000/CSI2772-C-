@@ -25,7 +25,7 @@ void CardsSet::novSet() {
 }
 
 void CardsSet::shuffle() {
-    srand(time(0));
+    srand(time_t(0));
     int nc = number;
     Card *secondset=new Card[nc];
     int *num=new int[nc];
@@ -51,7 +51,7 @@ void CardsSet::put(Card k) {
 
 Card CardsSet::lookIn(int no) {
     if (no > number)
-        return NULL;
+        return set[0];
     int position = number - no;
     return set[position];
 

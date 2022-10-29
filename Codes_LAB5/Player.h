@@ -9,3 +9,25 @@ private:
     const bool computer;
     int countPoints();
 };
+
+int Player::play() {
+    inHand.put(packet.take());
+    return countPoints();
+}
+
+int Player::countPoints() {
+    int numcards = inHand.numCards();
+    int points = 0;
+    for (int i = 0; i < numcards; i++) {
+        points += inHand.lookIn(i).value();
+    }
+    while (points <= 8) {
+        for (int i = 0; i < numcards; i++) {
+            if (inHand.lookIn(i).value() == 1)
+                points += 13;
+        }
+    }
+    return points;
+
+}
+
