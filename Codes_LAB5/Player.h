@@ -12,10 +12,12 @@ private:
 };
 
 int Player::play() {
-    char pick;
-    cout << "Do you want to pick a card (y or n) : " << endl;
-    cin >> pick;
-    if (pick == "y") {
+    char answer[3];
+    bool pick= true;
+    cout << "Do you want to pick a card : " << endl;
+    cin >> answer;
+    pick = answer[0] == 'y';
+    if (pick) {
         inHand.put(packet.take());
     }
     return countPoints();

@@ -57,5 +57,4 @@ Card CardsSet::lookIn(int no) {
         return set[0];
     int position = number - no;
     return set[position];
-
 }
