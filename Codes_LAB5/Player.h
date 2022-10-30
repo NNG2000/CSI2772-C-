@@ -18,12 +18,24 @@ int Player::play() {
         cout << "Do you want to pick a card : " << endl;
         cin >> answer;
         pick = answer[0] == 'y';
-        if (pick) {
+        while (pick) {
+            int points;
             inHand.put(packet.take());
+            points = countPoints();
+            cout << "your points are: " << points << endl;
+            cout << "Do you want to pick a card : " << endl;
+            cin >> answer;
+            pick = answer[0] == 'y';
         }
     }
     else {
+        int point;
         inHand.put(packet.take());
+        point = countPoints();
+        while (point <= 19) {
+            inHand.put(packet.take());
+            point = countPoints();
+        }
     }
     return countPoints();
 }
