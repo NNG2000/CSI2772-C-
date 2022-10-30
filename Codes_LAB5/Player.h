@@ -1,3 +1,4 @@
+using namespace std;
 class Player {
 public:
     Player(CardsSet& cardPacket, bool isComputer) : packet(cardPacket), computer
@@ -11,7 +12,12 @@ private:
 };
 
 int Player::play() {
-    inHand.put(packet.take());
+    char pick;
+    cout << "Do you want to pick a card (y or n) : " << endl;
+    cin >> pick;
+    if (pick == "y") {
+        inHand.put(packet.take());
+    }
     return countPoints();
 }
 
