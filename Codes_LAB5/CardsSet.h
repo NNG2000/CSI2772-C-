@@ -27,29 +27,21 @@ void CardsSet::novSet() {
 }
 
 void CardsSet::shuffle() {
-    srand(time_t(0));
-    int nc = number;
-    Card *secondset=new Card[nc];
-    int *num=new int[nc];
-    for (int n = 0; n < nc; n++)
-        num[n] = n;
-    random_shuffle(num, num + nc);
-
-    for (int i = 0; i < nc; i++)
-        secondset[i] = set[num[i]];
-
-    for (int i = 0; i < nc; i++) {
-        set[i] = secondset[i];
-    }
+    srand(time(0));
+    random_shuffle(set, set + number);
+    
 }
+    
 
 Card CardsSet::take() {
-    return set[--number];
+    number--;
+    return set[number];
 }
 
 void CardsSet::put(Card k) {
     if (number < 52)
-        set[number++] = k;
+        set[number] = k;
+    number++;
 }
 
 Card CardsSet::lookIn(int no) {
@@ -58,3 +50,4 @@ Card CardsSet::lookIn(int no) {
     int position = number - no;
     return set[position];
 }
+

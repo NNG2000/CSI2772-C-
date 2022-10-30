@@ -12,24 +12,40 @@ private:
 };
 
 int Player::play() {
+    if (packet.numCards() == 51) {
+        Card card = packet.lookIn(0);
+        inHand.empty();
+        inHand.put(card);
+    }
+   
     char answer[3];
     bool pick= true;
     if (!computer) {
-        cout << "Do you want to pick a card : " << endl;
+        cout << "You get Card: ";
+        inHand.lookIn(1).write(); cout << endl;
+        int points = countPoints();
+        cout << endl<<"Your score is " << points << " points" << endl;
+        cout << "Any additional Card ? ";
         cin >> answer;
         pick = answer[0] == 'y';
         while (pick) {
-            int points;
             inHand.put(packet.take());
+            cout << "You get Card: ";
+            packet.lookIn(0).write(); cout << endl;
             points = countPoints();
-            cout << "your points are: " << points << endl;
-            cout << "Do you want to pick a card : " << endl;
-            cin >> answer;
-            pick = answer[0] == 'y';
+            cout << endl<<"Your score is " << points << " points"<<endl;
+            if (countPoints() < 21) {
+                cout << "Any additional Card ? ";
+                cin >> answer;
+                pick = answer[0] == 'y';
+            }
+            else
+                pick = false;
         }
     }
     else {
         int point;
+        inHand.empty();
         inHand.put(packet.take());
         point = countPoints();
         while (point <= 19) {
@@ -44,13 +60,11 @@ int Player::countPoints() {
     int numcards = inHand.numCards();
     int points = 0;
     for (int i = 0; i < numcards; i++) {
-        points += inHand.lookIn(i).value();
+        points += inHand.lookIn(numcards-i).value();
     }
-    while (points <= 8) {
-        for (int i = 0; i < numcards; i++) {
-            if (inHand.lookIn(i).value() == 1)
-                points += 13;
-        }
+    for (int i = 0; i < numcards; i++) {
+        if (inHand.lookIn(numcards-i).value() == 1 && points<8)
+            points += 13;
     }
     return points;
 

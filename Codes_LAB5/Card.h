@@ -43,16 +43,16 @@ void Card::write() {
     }
     switch (col) {
     case 0:
-        cout << cardName << " of " << "clubs";
+        cout << cardName << " of " << "Clubs";
         break;
     case 1:
-        cout << cardName << " of " << "diamonds";
+        cout << cardName << " of " << "Diamonds";
         break;
     case 2:
-        cout << cardName << " of " << "hearts";
+        cout << cardName << " of " << "Hearts";
         break;
     case 3:
-        cout << cardName << " of " << "spades";
+        cout << cardName << " of " << "Spades";
         break;
     }
 }
