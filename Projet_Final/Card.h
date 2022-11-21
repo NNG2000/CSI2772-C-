@@ -19,7 +19,7 @@ class Card
 class Blue : public virtual card {
     const maxCard = 20;
     name = "Blue";
-    private string[20] = (name);
+    private string[20] = {name};
     public int getCardsPerCoin(int coins) {
         switch (coins) {
         case 1:
@@ -34,9 +34,13 @@ class Blue : public virtual card {
         case 4:
             return 10;
             break;
-        
+        default:
+            return 0;
         }
 
+    }
+    public string getName() {
+        return name;
     }
 
 };
@@ -44,7 +48,7 @@ class Blue : public virtual card {
 class Chili : public virtual card {
     const maxCard = 18;
     name = "Chili";
-    private string[20] = (name);
+    private string[20] = { name };
     public int getCardsPerCoin(int coins) {
         switch (coins) {
         case 1:
@@ -58,10 +62,15 @@ class Chili : public virtual card {
             break;
         case 4:
             return 9;
-                break;
+            break;
+        default:
+            return 0;
 
         }
 
+    }
+    public string getName() {
+        return name;
     }
 
 };
@@ -69,7 +78,7 @@ class Chili : public virtual card {
 class Stink : public virtual card {
     const maxCard = 16;
     name = "Stink";
-    private string[20] = (name);
+    private string[20] = { name };
     public int getCardsPerCoin(int coins) {
         switch (coins) {
         case 1:
@@ -84,16 +93,21 @@ class Stink : public virtual card {
         case 4:
             return 8;
             break;
+        default:
+            return 0;
 
         }
 
+    }
+    public string getName() {
+        return name;
     }
 };
 
 class green : public virtual card {
     const maxCard = 14;
     name = "Green";
-    private string[20] = (name);
+    private string[20] = { name };
     public int getCardsPerCoin(int coins) {
         switch (coins) {
         case 1:
@@ -108,9 +122,14 @@ class green : public virtual card {
         case 4:
             return 7;
             break;
+        default:
+            return 0;
 
         }
 
+    }
+    public string getName() {
+        return name;
     }
 
 };
@@ -118,7 +137,7 @@ class green : public virtual card {
 class soy : public virtual card {
     const maxCard = 12;
     name = "Soy";
-    private string[20] = (name);
+    private string[20] = { name };
     public int getCardsPerCoin(int coins) {
         switch (coins) {
         case 1:
@@ -133,9 +152,14 @@ class soy : public virtual card {
         case 4:
             return 7;
             break;
+        default:
+            return 0;
 
         }
 
+    }
+    public string getName() {
+        return name;
     }
 
 };
@@ -143,7 +167,7 @@ class soy : public virtual card {
 class Black : public virtual card {
     const maxCard = 10;
     name = "Black";
-    private string[20] = (name);
+    private string[20] = { name };
     public int getCardsPerCoin(int coins) {
         switch (coins) {
         case 1:
@@ -158,9 +182,14 @@ class Black : public virtual card {
         case 4:
             return 6;
             break;
+        default:
+            return 0;
 
         }
 
+    }
+    public string getName() {
+        return name;
     }
 
 };
@@ -168,7 +197,7 @@ class Black : public virtual card {
 class red : public virtual card {
     const maxCard = 8;
     name = "Red";
-    private string[20] = (name);
+    private string[20] = { name };
     public int getCardsPerCoin(int coins) {
         switch (coins) {
         case 1:
@@ -185,33 +214,35 @@ class red : public virtual card {
             break;
 
         }
+        default:
+            return 0;
 
+    }
+    public string getName() {
+        return name;
     }
 };
 
 class garde : public virtual card {
     const maxCard = 6;
     name = "Garde";
-    private string[20] = (name);
+    private string[20] = { name };
     public int getCardsPerCoin(int coins) {
         switch (coins) {
-        case 1:
-            return 0;
-            break;
         case 2:
             return 2;
             break;
         case 3:
             return 3;
             break;
-        case 4:
-            return 0;
-            break;
 
         }
         default:
+            return 0;
 
-
+    }
+    public string getName() {
+        return name;
     }
 
 };
