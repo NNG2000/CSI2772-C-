@@ -14,6 +14,7 @@ public:
     vector<Card*> cards;
     static CardFactory* getFactory();
     Deck getDeck();
+    Card* getCard(char) const;
     
 };
 
@@ -60,4 +61,36 @@ Deck CardFactory::getDeck() {
 
     Deck deck(this); //isteam??
     return deck;
+}
+
+Card* CardFactory::getCard(char type) const {  //used when we create Deck
+    Card* newCard = NULL;
+
+    if (type == 'B') {
+        newCard = new Blue();
+    }
+    else if (type == 'C') {
+        newCard = new Chili();
+    }
+    else if (type == 'S') {
+        newCard = new Stink();
+    }
+    else if (type == 'G') {
+        newCard = new Green();
+    }
+    else if (type == 's') {
+        newCard = new soy();
+    }
+    else if (type == 'b') {
+        newCard = new black();
+    }
+    else if (type == 'R') {
+        newCard = new Red();
+    }
+    else if (type == 'g') {
+        newCard = new garden();
+    }
+
+    return newCard;
+
 }
