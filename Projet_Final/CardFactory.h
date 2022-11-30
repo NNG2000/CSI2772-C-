@@ -31,7 +31,7 @@ CardFactory::CardFactory() {
     }
 
     for (int i = 0; i < 14; i++) {
-        cards.push_back(new green);
+        cards.push_back(new Green);
     }
 
     for (int i = 0; i < 12; i++) {
@@ -39,15 +39,15 @@ CardFactory::CardFactory() {
     }
 
     for (int i = 0; i < 10; i++) {
-        cards.push_back(new Black);
+        cards.push_back(new black);
     }
 
     for (int i = 0; i < 8; i++) {
-        cards.push_back(new red);
+        cards.push_back(new Red);
     }
 
     for (int i = 0; i < 6; i++) {
-        cards.push_back(new garde);
+        cards.push_back(new garden);
     }
 }
 
@@ -57,6 +57,7 @@ CardFactory* CardFactory::getFactory() {
 }
 
 Deck CardFactory::getDeck() {
-    Deck deck(in, this); //isteam??
+
+    Deck deck(this); //isteam??
     return deck;
 }
