@@ -1,4 +1,4 @@
-﻿
+
 #include <iostream>
 #include <iostream>
 using namespace std;
@@ -130,7 +130,7 @@ public: void print(ostream& out) {
 }
 };
 
-class green : virtual public Card {
+class Green : virtual public Card {
     const int maxCard = 14;
     string name = "Green";
 private: string cardList[20] = { name };
@@ -171,7 +171,7 @@ public: void print(ostream& out) {
 
 class soy : virtual public Card {
     const int maxCard = 12;
-    string name = "Soy";
+    string name = "soy";
 private: string cardList[20] = { name };
 public: int getCardsPerCoin(int coins) {
     int numberCards = 0;
@@ -200,15 +200,15 @@ public: string getName() {
 }
 
 public: void print(ostream& out) {
-    char id = 'S';
+    char id = 's';
     out.put(id);
 }
 
 };
 
-class Black : virtual public Card {
+class black : virtual public Card {
     const int maxCard = 10;
-    string name = "Black";
+    string name = "black";
 private: string cardList[20] = { name };
 public: int getCardsPerCoin(int coins) {
     int numberCards = 0;
@@ -239,13 +239,13 @@ public: string getName() {
 }
 
 public: void print(ostream& out) {
-    char id = 'B';
+    char id = 'b';
     out.put(id);
 }
 
 };
 
-class red : virtual public Card {
+class Red : virtual public Card {
     const int maxCard = 8;
     string name = "Red";
 private: string cardList[20] = { name };
@@ -282,9 +282,9 @@ public: void print(ostream& out) {
 }
 };
 
-class garde : virtual public Card {
+class garden : virtual public Card {
     const int maxCard = 6;
-    string name = "Garde";
+    string name = "garden";
 private: string cardList[20] = { name };
 public: int getCardsPerCoin(int coins) {
     int numberCards = 0;
@@ -308,7 +308,7 @@ public: string getName() {
 }
 
 public: void print(ostream& out) {
-    char id = 'G';
+    char id = 'g';
     out.put(id);
 }
 
