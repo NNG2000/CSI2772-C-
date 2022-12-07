@@ -18,7 +18,7 @@ template <class T> class Chain : public ChainBase, public vector <T*>{
 
 	Chain();
 	Chain(istream&, const CardFactory*);
-	bool checkCard(Card*);						//returns true if it's legal to add the card to the chain.
+	bool legal(Card*);						//returns true if it's legal to add the card to the chain.
 	Chain<T>& operator+= (Card* card);
 	int sell();
 	void addCard(Card*);
@@ -71,7 +71,7 @@ template<class T> Chain<T>::Chain(istream& in, const CardFactory* cf) {
 
 }
 
-template<class T> bool Chain<T>::checkCard(Card* card)
+template<class T> bool Chain<T>::legal(Card* card)
 {
 	return (type.compare((*card).getName()) == 0);
 }
@@ -79,7 +79,7 @@ template<class T> bool Chain<T>::checkCard(Card* card)
 template<class T> Chain<T>& Chain<T>::operator+=(Card* card)
 {
 
-	if (checkCard(card)) {
+	if (legal(card)) {
 		T* temp = new T();
 		this->push_back(temp);
 	}

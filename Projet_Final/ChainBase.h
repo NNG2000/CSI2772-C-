@@ -5,7 +5,7 @@ protected:
 	virtual void addCard(Card*) = 0;
 	virtual void print(ostream&) const = 0;
 public:
-	virtual bool checkCard(Card*) = 0;
+	virtual bool legal(Card*) = 0;
 	virtual int sell() = 0;
 	virtual int getSize() = 0;
 	virtual string getType() = 0;
@@ -18,3 +18,4 @@ public:
 		return *this;
 	};
 
+};
