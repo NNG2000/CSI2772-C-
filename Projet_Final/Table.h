@@ -49,3 +49,15 @@ void Table::printHand(bool affiche) {
 	players[1].printHand(affiche);
 }
 
+ostream & operator<<(ostream & out, Table tbl)
+{
+	out << "Affichage de la table: \n" ;
+	for (Player player : tbl.players) {
+		out << player << "\n";
+	}
+	out << "Dessus de la pile au rebut:\n" << *tbl.discard << "\n" << "Affichage du trading area:\n" << *t.ta <<"\n";
+	out << "-----------------\n";
+
+	return out;
+}
+
