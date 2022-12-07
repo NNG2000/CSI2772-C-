@@ -1,31 +1,33 @@
-
 #pragma once
 #include <iostream>
 #include <vector>
-using namespace std;
+//#using namespace std;
+#include "Table.h"
 
 
 void main() {
-	Boolean game = true;
+	bool game = true;
 	char save;
-	string gagnant;
-
+	string gagnant, joueur2, joueur1;
+	joueur1 = "premier";
+	joueur2 = "deuxieme";
+	Table* table = new Table(joueur1, joueur2);;
 	while (game) {
 		//setup
 		cout << "Voulez-vous commenzer une nouvelle partie ? (o ou n)";
-		cin >> save >> endl;
+		cin >> save ;
 		//input players, initialization of deck, draw 5 cards from each hand
 		if (save == 'o') {
 			game = false;
-			string joueur1, joureur2;
+			string joueur1;
 			cout << "Veuillez inserer le nom du premier joueur: " << endl;
 			cin >> joueur1;
 			cout << "Veuillez inserer le nom du deuxieme joueur: " << endl;
 			cin >> joueur2;
-			Table* table = new Table(joueur1, joueur2);
+			table = new Table(joueur1, joueur2);
 			for (int i = 0; i < 2; i++) {
 				for (int j = 0; j < 5; j++) {
-					table.players[i] += table->deck->draw();
+					table->players[i] += table->deck->draw();
 					//table->players.get(i) += table->deck->draw();
 				}
 			}
@@ -36,8 +38,8 @@ void main() {
 			ifstream saved("Bohnanza.txt");
 			if (saved.is_open()) {
 				game = false;
-				Table* table = new Table(saved, factory);
-				return table;
+				table = new Table(saved, factory);
+				
 			}
 			else
 				cout << "Il n'y a aucune partie sauvegardee" << endl;
@@ -46,18 +48,18 @@ void main() {
 
 	//while there are still cards
 	while (!table->win(gagnant)) {
-		cout << "Voulez-vous sauver le jeu et quitter? (o ou n)"<<endl;
+		cout << "Voulez-vous sauver le jeu et quitter? (o ou n)" << endl;
 		char reponse;
 		cin >> reponse;
 		//if pause save game to file
 		if (reponse == 'o') {
 			ofstream save("Bohnanza.txt");
 			if (save) {
-				table.players[0].print(save);
-				table.players[1].print(save);
-				(*table.discard).print(save);
-				save << "\n" << *table.ta;
-				save << "\n" << *table.deck << endl;
+				table->players[0].print(save);
+				table->players[1].print(save);
+				(*table->discard).print(save);
+				save << "\n" << *table->ta;
+				save << "\n" << *table->deck << endl;
 				save.close();
 			}
 			return;
@@ -65,7 +67,7 @@ void main() {
 		else {
 			//for each player
 			for (int i = 0; i < 2; i++) {
-				Player& joueur = table.players[i];
+				Player& joueur = table->players[i];
 				//display table
 				cout << *table << "\n";
 				cout << "Votre main: " << *joueur.getHand() << endl;
@@ -75,7 +77,7 @@ void main() {
 				if (!table->ta->empty()) {
 					char reponse;
 					int i = 0;
-					bool jeter=true;
+					bool jeter = true;
 
 					while (i < table->ta->cardTypes.size()) {
 						string sorte = table->ta->getCardType(i);
@@ -92,7 +94,7 @@ void main() {
 								else {
 									bool next = false;
 									bool echanger = true;
-									bool possible =true;
+									bool possible = true;
 									char reponse = ' ';
 									if (joueur.getMaxNumChains() < 3) {
 										cout << "Voulez-vous acheter une nouvelle chaine? (o ou n) ";
@@ -110,7 +112,7 @@ void main() {
 									}
 									if (echanger) {
 										if (possible) {
-											cout << "Voulez-vous echanger l'une de vos chaine? (y/n) ";
+											cout << "Voulez-vous echanger l'une de vos chaine? (o ou n) ";
 											cin >> reponse;
 										}
 										else {
@@ -118,10 +120,10 @@ void main() {
 										}
 										if (reponse == 'o' || !possible) {
 											next = true;
-											bool valid=false;
+											bool valid = false;
 											int chaine;
 											for (int i = 0; i < joueur.getNumChains(); i++)
-												cout <<"Chaine " i + 1 << " de type " << joueur[i] << endl;
+												cout << "Chaine " <<i + 1 << " de type " << joueur[i] << endl;
 											while (!valid) {
 												cout << endl << "Veuillez entrer le numero de la chaine que vous voulez echanger : ";
 												cin >> chaine;
@@ -143,14 +145,14 @@ void main() {
 
 							}
 							i--;
-						}	
+						}
 						else if (jeter) {
 							Card* carte = table->ta->trade(sorte);
 							while (carte) {
 								(*table->discard) += carte;
 								carte = table->ta->trade(sorte);
 							}
-							cout <<"Le type "<< sorte << " a ete mis dans la pile au rebut " << endl << endl;
+							cout << "Le type " << sorte << " a ete mis dans la pile au rebut " << endl << endl;
 							i--;
 
 						}
@@ -169,8 +171,8 @@ void main() {
 
 
 				cout << "Jeu de la premiere carte de votre main: " << joueur.getHand()->top() << "\n";
-				bool continue = true;
-				while (continue) {
+				bool continu= true;
+				while (continu) {
 					Card* topcard = joueur.getHand()->play();
 					if (joueur.addToChain(topcard)) {
 						for (int i = 0; i < joueur.getNumChains(); i++) {
@@ -203,7 +205,7 @@ void main() {
 						}
 						if (echanger) {
 							if (possible) {
-								cout << "Voulez-vous echanger l'une de vos chaine? (y/n) ";
+								cout << "Voulez-vous echanger l'une de vos chaine? (o ou n) ";
 								cin >> reponse;
 							}
 							else {
@@ -214,7 +216,7 @@ void main() {
 								bool valid = false;
 								int chaine;
 								for (int i = 0; i < joueur.getNumChains(); i++)
-									cout << "Chaine " i + 1 << " de type " << joueur[i] << endl;
+									cout << "Chaine "<< i + 1 << " de type " << joueur[i] << endl;
 								while (!valid) {
 									cout << endl << "Veuillez entrer le numero de la chaine que vous voulez echanger : ";
 									cin >> chaine;
@@ -232,20 +234,20 @@ void main() {
 
 					}
 					//if (joueur.getHand()->size() == 0)
-						//continue = false;
+						//continu = false;
 
 					if (joueur.getHand()->size() > 0) {
 						cout << joueur << endl;
 						cout << "Votre main: " << *joueur.getHand() << endl;
-						cout << "Voulez-vous jouer une deuxieme carte? " << joueur.getHand()->top() << " (o ou n) ";
+						cout << "Voulez-vous jouer la deuxieme carte " <<joueur.getHand()->top() << "  ? " << " (o ou n) ";
 						cin >> reponse;
 						if (reponse == 'n' || (joueur.getHand()->size() == 0))
-							continue = false;
+							continu = false;
 					}
 
 					if (joueur.getHand()->size() > 0) {
 						//discard an arbitrairy card from the players hand
-						cout << player << endl << "Votre main: " << *joueur.getHand() << "\n";
+						cout << joueur << endl << "Votre main: " << *joueur.getHand() << "\n";
 						cout << "Voulez-vous jeter une carte arbitraire? (o ou n) ";
 						cin >> reponse;
 						if (reponse == 'o') {
@@ -314,7 +316,7 @@ void main() {
 									}
 									if (echanger) {
 										if (possible) {
-											cout << "Voulez-vous echanger l'une de vos chaine? (y/n) ";
+											cout << "Voulez-vous echanger l'une de vos chaine? (o ou n) ";
 											cin >> reponse;
 										}
 										else {
@@ -325,7 +327,7 @@ void main() {
 											bool valid = false;
 											int chaine;
 											for (int i = 0; i < joueur.getNumChains(); i++)
-												cout << "Chaine " i + 1 << " de type " << joueur[i] << endl;
+												cout << "Chaine " <<i + 1 << " de type " << joueur[i] << endl;
 											while (!valid) {
 												cout << endl << "Veuillez entrer le numero de la chaine que vous voulez echanger : ";
 												cin >> chaine;
@@ -365,21 +367,21 @@ void main() {
 				}
 			}
 		}
-		catch (DeckEmpty d) {
+		/*
+		catch(DeckEmpty d) {
 			if (table->win(gagnant)) {
-				cout <<  winner << " est le gagnant de la partie"<endl;
-				remove("Bohnanza.txt"); 
+				cout << winner << " est le gagnant de la partie" < endl;
+				remove("Bohnanza.txt");
 				//cout << endl << endl;
 				system("pause");
-				return ;
+				return;
 			}
 		}
+		*/
 	}
-	cout << winner << " est le gagnant de la partie" < endl;
+	cout << gagnant << " est le gagnant de la partie" << endl;
 	remove("Bohnanza.txt");
 	//cout << endl << endl;
 	system("pause");
 	return;
 }
-	
-	
